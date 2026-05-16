@@ -1,0 +1,38 @@
+
+<div>
+  <h2>Students</h2>
+
+  <!-- Add Student Form -->
+  <div>
+    <h3>Add New Student</h3>
+    <input type="text" placeholder="Name" [(ngModel)]="newStudent.name" />
+    <input type="email" placeholder="Email" [(ngModel)]="newStudent.email" />
+    <input type="text" placeholder="Phone" [(ngModel)]="newStudent.phone" />
+    <input type="text" placeholder="Address" [(ngModel)]="newStudent.address" />
+    <button (click)="addStudent()">Add Student</button>
+  </div>
+
+  <!-- Students Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.phone }}</td>
+        <td>{{ student.address }}</td>
+        <td>
+          <button (click)="deleteStudent(student.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

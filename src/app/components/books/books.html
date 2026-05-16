@@ -1,0 +1,43 @@
+<div>
+  <h2>Books</h2>
+
+  <!-- Add Book Form -->
+  <div>
+    <h3>Add New Book</h3>
+    <input type="text" placeholder="Title" [(ngModel)]="newBook.title" />
+    <input type="text" placeholder="Author" [(ngModel)]="newBook.author" />
+    <input type="text" placeholder="ISBN" [(ngModel)]="newBook.isbn" />
+    <input type="text" placeholder="Category" [(ngModel)]="newBook.category" />
+    <input type="text" placeholder="Genre" [(ngModel)]="newBook.genre" />
+    <input type="text" placeholder="Shelf Number" [(ngModel)]="newBook.shelfNumber" />
+    <button (click)="addBook()">Add Book</button>
+  </div>
+
+  <!-- Books Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+        <th>Category</th>
+        <th>Genre</th>
+        <th>Shelf Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.isbn }}</td>
+        <td>{{ book.category }}</td>
+        <td>{{ book.genre }}</td>
+        <td>{{ book.shelfNumber }}</td>
+        <td>
+          <button (click)="deleteBook(book.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

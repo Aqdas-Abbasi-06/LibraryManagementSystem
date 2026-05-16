@@ -1,0 +1,37 @@
+<div>
+  <h2>Book Issues</h2>
+
+  <!-- Add Book Issue Form -->
+  <div>
+    <h3>Issue a Book</h3>
+    <input type="text" placeholder="Student Name" [(ngModel)]="newIssue.studentName" />
+    <input type="text" placeholder="Book Title" [(ngModel)]="newIssue.bookTitle" />
+    <input type="date" placeholder="Issue Date" [(ngModel)]="newIssue.issueDate" />
+    <input type="date" placeholder="Return Date" [(ngModel)]="newIssue.returnDate" />
+    <button (click)="addIssue()">Issue Book</button>
+  </div>
+
+  <!-- Book Issues Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Book Title</th>
+        <th>Issue Date</th>
+        <th>Return Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let issue of bookIssues">
+        <td>{{ issue.studentName }}</td>
+        <td>{{ issue.bookTitle }}</td>
+        <td>{{ issue.issueDate }}</td>
+        <td>{{ issue.returnDate }}</td>
+        <td>
+          <button (click)="deleteIssue(issue.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
