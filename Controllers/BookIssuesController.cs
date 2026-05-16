@@ -31,8 +31,13 @@ namespace LMS.API.Controllers
                     IssueId = reader.GetInt32(0),
                     BookId = reader.GetInt32(1),
                     StudentId = reader.GetInt32(2),
-                    IssueDate = reader.GetString(3),
-                    ReturnDate = reader.GetString(4),
+
+                    IssueDate = DateTime.Parse(reader.GetString(3)),
+
+                    ReturnDate = reader.IsDBNull(4)
+                        ? null
+                        : DateTime.Parse(reader.GetString(4)),
+
                     Status = reader.GetString(5)
                 });
             }
@@ -64,8 +69,13 @@ namespace LMS.API.Controllers
                 IssueId = reader.GetInt32(0),
                 BookId = reader.GetInt32(1),
                 StudentId = reader.GetInt32(2),
-                IssueDate = reader.GetString(3),
-                ReturnDate = reader.GetString(4),
+
+                IssueDate = DateTime.Parse(reader.GetString(3)),
+
+                ReturnDate = reader.IsDBNull(4)
+                    ? null
+                    : DateTime.Parse(reader.GetString(4)),
+
                 Status = reader.GetString(5)
             };
         }
@@ -83,8 +93,13 @@ namespace LMS.API.Controllers
 
             cmd.Parameters.AddWithValue("$bookid", issue.BookId);
             cmd.Parameters.AddWithValue("$studentid", issue.StudentId);
-            cmd.Parameters.AddWithValue("$issuedate", issue.IssueDate);
-            cmd.Parameters.AddWithValue("$returndate", issue.ReturnDate);
+
+            cmd.Parameters.AddWithValue("$issuedate",
+                issue.IssueDate.ToString("yyyy-MM-dd"));
+
+            cmd.Parameters.AddWithValue("$returndate",
+                issue.ReturnDate?.ToString("yyyy-MM-dd"));
+
             cmd.Parameters.AddWithValue("$status", issue.Status);
 
             int result = cmd.ExecuteNonQuery();
@@ -110,11 +125,17 @@ namespace LMS.API.Controllers
                 Status = $status
                 WHERE IssueId = $id";
 
-            cmd.Parameters.AddWithValue("$id", issue.IssueId);
+            cmd.Parameters.AddWithValue("$id", id);
+
             cmd.Parameters.AddWithValue("$bookid", issue.BookId);
             cmd.Parameters.AddWithValue("$studentid", issue.StudentId);
-            cmd.Parameters.AddWithValue("$issuedate", issue.IssueDate);
-            cmd.Parameters.AddWithValue("$returndate", issue.ReturnDate);
+
+            cmd.Parameters.AddWithValue("$issuedate",
+                issue.IssueDate.ToString("yyyy-MM-dd"));
+
+            cmd.Parameters.AddWithValue("$returndate",
+                issue.ReturnDate?.ToString("yyyy-MM-dd"));
+
             cmd.Parameters.AddWithValue("$status", issue.Status);
 
             int rows = cmd.ExecuteNonQuery();
