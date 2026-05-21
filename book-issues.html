@@ -1,0 +1,90 @@
+<div class="container-fluid py-4">
+
+  <!-- Page Header -->
+  <div class="page-header d-flex align-items-center gap-3 mb-4">
+    <i class="fas fa-exchange-alt fa-2x" style="color: #FAF3E0;"></i>
+    <div>
+      <h2 class="mb-0">Book Issues</h2>
+      <p class="mb-0">Track issued and returned books</p>
+    </div>
+  </div>
+
+  <!-- Issue Book Form Card -->
+  <div class="card p-4 mb-4">
+    <h5 class="mb-3" style="color: var(--primary);">
+      <i class="fas fa-hand-holding-heart me-2"></i>Issue a Book
+    </h5>
+    <div class="row g-3">
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="👤 Student Name" [(ngModel)]="newIssue.studentName" />
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="📖 Book Title" [(ngModel)]="newIssue.bookTitle" />
+      </div>
+      <div class="col-md-2">
+        <label class="form-label small" style="color: var(--text-light);">Issue Date</label>
+        <input type="date" class="form-control" [(ngModel)]="newIssue.issueDate" />
+      </div>
+      <div class="col-md-2">
+        <label class="form-label small" style="color: var(--text-light);">Return Date</label>
+        <input type="date" class="form-control" [(ngModel)]="newIssue.returnDate" />
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <button class="btn btn-primary w-100" (click)="addIssue()">
+          <i class="fas fa-plus me-2"></i>Issue Book
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Book Issues Table -->
+  <div class="card p-4">
+    <h5 class="mb-3" style="color: var(--primary);">
+      <i class="fas fa-clipboard-list me-2"></i>All Issues
+      <span class="badge ms-2" style="background-color: var(--secondary); font-size: 13px;">
+        {{ bookIssues.length }} Records
+      </span>
+    </h5>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Student Name</th>
+            <th>Book Title</th>
+            <th>Issue Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let issue of bookIssues; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td><strong>{{ issue.studentName }}</strong></td>
+            <td>{{ issue.bookTitle }}</td>
+            <td>{{ issue.issueDate }}</td>
+            <td>{{ issue.returnDate }}</td>
+            <td>
+              <span class="badge" style="background-color: #6A994E;">
+                <i class="fas fa-check me-1"></i>Issued
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteIssue(issue.id)">
+                <i class="fas fa-trash me-1"></i>Delete
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="bookIssues.length === 0">
+            <td colspan="7" class="text-center py-4" style="color: var(--text-light);">
+              <i class="fas fa-clipboard fa-2x mb-2 d-block" style="color: var(--border);"></i>
+              No book issues recorded yet
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

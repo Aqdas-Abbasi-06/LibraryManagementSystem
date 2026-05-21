@@ -1,0 +1,92 @@
+<div class="container-fluid py-4">
+
+  <!-- Page Header -->
+  <div class="page-header d-flex align-items-center gap-3 mb-4">
+    <i class="fas fa-book fa-2x" style="color: #FAF3E0;"></i>
+    <div>
+      <h2 class="mb-0">Books</h2>
+      <p class="mb-0">Manage your library book collection</p>
+    </div>
+  </div>
+
+  <!-- Add Book Form Card -->
+  <div class="card p-4 mb-4">
+    <h5 class="mb-3" style="color: var(--primary);">
+      <i class="fas fa-plus-circle me-2"></i>Add New Book
+    </h5>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="📖 Title" [(ngModel)]="newBook.title" />
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="✍️ Author" [(ngModel)]="newBook.author" />
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="🔢 ISBN" [(ngModel)]="newBook.isbn" />
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="📂 Category" [(ngModel)]="newBook.category" />
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="🎭 Genre" [(ngModel)]="newBook.genre" />
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="🗄️ Shelf Number" [(ngModel)]="newBook.shelfNumber" />
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary px-4" (click)="addBook()">
+          <i class="fas fa-plus me-2"></i>Add Book
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Books Table Card -->
+  <div class="card p-4">
+    <h5 class="mb-3" style="color: var(--primary);">
+      <i class="fas fa-list me-2"></i>All Books
+      <span class="badge ms-2" style="background-color: var(--secondary); font-size: 13px;">
+        {{ books.length }} Books
+      </span>
+    </h5>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Category</th>
+            <th>Genre</th>
+            <th>Shelf</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td><strong>{{ book.title }}</strong></td>
+            <td>{{ book.author }}</td>
+            <td><span class="badge" style="background-color: var(--border); color: var(--text-dark);">{{ book.isbn }}</span></td>
+            <td>{{ book.category }}</td>
+            <td>{{ book.genre }}</td>
+            <td>{{ book.shelfNumber }}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteBook(book.id)">
+                <i class="fas fa-trash me-1"></i>Delete
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="books.length === 0">
+            <td colspan="8" class="text-center py-4" style="color: var(--text-light);">
+              <i class="fas fa-book-open fa-2x mb-2 d-block" style="color: var(--border);"></i>
+              No books added yet
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
