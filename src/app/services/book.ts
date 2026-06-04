@@ -5,8 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class BookService {
-  private apiUrl = 'http://localhost:5016/api/Books';
-
+  private apiUrl = 'https://librarymanagementsystem-production-ee1b.up.railway.app/api/Books'
   constructor(private http: HttpClient) {}
 
   getBooks() {
